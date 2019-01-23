@@ -55,8 +55,7 @@ public class KeyValueStoragePrefixedKeyBlockchainStorage implements BlockchainSt
 
   public KeyValueStoragePrefixedKeyBlockchainStorage(
       final KeyValueStorage storage, final BlockHashFunction blockHashFunction) {
-    this.storage = new InMemoryCacheKeyValueStorage(storage,
-        Runtime.getRuntime().maxMemory() / 4);
+    this.storage = storage;
     this.blockHashFunction = blockHashFunction;
   }
 
