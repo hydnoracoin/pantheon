@@ -20,6 +20,7 @@ import tech.pegasys.pantheon.ethereum.core.BlockHeader;
 import tech.pegasys.pantheon.ethereum.core.Hash;
 import tech.pegasys.pantheon.ethereum.core.TransactionReceipt;
 import tech.pegasys.pantheon.ethereum.rlp.RLP;
+import tech.pegasys.pantheon.services.kvstore.InMemoryCacheKeyValueStorage;
 import tech.pegasys.pantheon.services.kvstore.KeyValueStorage;
 import tech.pegasys.pantheon.util.bytes.Bytes32;
 import tech.pegasys.pantheon.util.bytes.BytesValue;
@@ -54,7 +55,8 @@ public class KeyValueStoragePrefixedKeyBlockchainStorage implements BlockchainSt
 
   public KeyValueStoragePrefixedKeyBlockchainStorage(
       final KeyValueStorage storage, final BlockHashFunction blockHashFunction) {
-    this.storage = storage;
+    this.storage = new InMemoryCacheKeyValueStorage(storage,
+        Runtime.getRuntime().maxMemory() / 4);
     this.blockHashFunction = blockHashFunction;
   }
 
