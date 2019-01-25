@@ -29,7 +29,7 @@ public class RocksDbStorageProvider {
     final KeyValueStorage kv =
         new InMemoryCacheKeyValueStorage(
             RocksDbKeyValueStorage.create(Files.createDirectories(databaseDir), metricsSystem),
-            Runtime.getRuntime().maxMemory() / 4);
+            10L * 1024 * 1024 * 1024);
 
     return new KeyValueStorageProvider(kv);
   }
