@@ -41,7 +41,6 @@ public class RpcModules implements JsonRpcMethod {
 
   @Override
   public JsonRpcResponse response(final JsonRpcRequest req) {
-    // For now, just return an empty list.
     return new JsonRpcSuccessResponse(req.getId(), moduleVersions);
   }
 }
