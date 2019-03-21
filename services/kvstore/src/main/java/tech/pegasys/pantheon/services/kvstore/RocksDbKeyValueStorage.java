@@ -26,6 +26,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.rocksdb.BlockBasedTableConfig;
 import org.rocksdb.Options;
 import org.rocksdb.RocksDBException;
 import org.rocksdb.TransactionDB;
@@ -56,6 +57,8 @@ public class RocksDbKeyValueStorage implements KeyValueStorage, Closeable {
     RocksDbUtil.loadNativeLibrary();
     try {
       options = new Options().setCreateIfMissing(true);
+      BlockBasedTableConfig blockBasedTableConfig = new BlockBasedTableConfig().setFormatVersion(2);
+      options.setTableFormatConfig(blockBasedTableConfig);
       txOptions = new TransactionDBOptions();
       db = TransactionDB.open(options, txOptions, storageDirectory.toString());
 
