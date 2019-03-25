@@ -268,7 +268,7 @@ public class RocksDbKeyValueStorage implements KeyValueStorage, Closeable {
     }
   }
 
-  private class RocksDbTransaction extends AbstractTransaction {
+  private static class RocksDbTransaction extends AbstractTransaction {
     private final org.rocksdb.Transaction innerTx;
     private final WriteOptions options;
 
