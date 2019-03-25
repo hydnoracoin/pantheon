@@ -96,7 +96,7 @@ public class PrometheusMetricsSystem implements MetricsSystem {
         (k) -> {
           if (enabledCategories.contains(category)) {
             final Counter counter = Counter.build(metricName, help).labelNames(labelNames).create();
-            addCollector(category, counter);
+            addCollectorUnchecked(category, counter);
             return new PrometheusCounter(counter);
           } else {
             return NoOpMetricsSystem.NO_OP_LABELLED_COUNTER;
@@ -125,7 +125,7 @@ public class PrometheusMetricsSystem implements MetricsSystem {
                     .quantile(1.0, 0)
                     .labelNames(labelNames)
                     .create();
-            addCollector(category, summary);
+            addCollectorUnchecked(category, summary);
             return new PrometheusTimer(summary);
           } else {
             return NoOpMetricsSystem.NO_OP_LABELLED_TIMER;
@@ -142,11 +142,17 @@ public class PrometheusMetricsSystem implements MetricsSystem {
     final String metricName = convertToPrometheusName(category, name);
     if (enabledCategories.contains(category)) {
       final Collector collector = new CurrentValueCollector(metricName, help, valueSupplier);
-      addCollector(category, collector);
+      addCollectorUnchecked(category, collector);
     }
   }
 
-  private void addCollector(final MetricCategory category, final Collector metric) {
+  public void addCollector(final MetricCategory category, final Collector metric) {
+    if (enabledCategories.contains(category)) {
+      addCollectorUnchecked(category, metric);
+    }
+  }
+
+  private void addCollectorUnchecked(final MetricCategory category, final Collector metric) {
     metric.register(registry);
     collectors
         .computeIfAbsent(category, key -> Collections.newSetFromMap(new ConcurrentHashMap<>()))

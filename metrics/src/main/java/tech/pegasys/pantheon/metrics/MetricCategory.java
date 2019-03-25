@@ -24,6 +24,7 @@ public enum MetricCategory {
   PEERS("peers"),
   PROCESS("process", false),
   ROCKSDB("rocksdb"),
+  ROCKSDB_STATS("rocksdb", false),
   RPC("rpc"),
   SYNCHRONIZER("synchronizer");
 
