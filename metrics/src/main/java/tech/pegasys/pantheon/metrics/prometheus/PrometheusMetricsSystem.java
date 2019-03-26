@@ -219,7 +219,7 @@ public class PrometheusMetricsSystem implements MetricsSystem {
         labelValues);
   }
 
-  private String convertToPrometheusName(final MetricCategory category, final String name) {
+  public static String convertToPrometheusName(final MetricCategory category, final String name) {
     return prometheusPrefix(category) + name;
   }
 
@@ -228,7 +228,7 @@ public class PrometheusMetricsSystem implements MetricsSystem {
     return metricName.startsWith(prefix) ? metricName.substring(prefix.length()) : metricName;
   }
 
-  private String prometheusPrefix(final MetricCategory category) {
+  private static String prometheusPrefix(final MetricCategory category) {
     return category.isPantheonSpecific()
         ? PANTHEON_PREFIX + category.getName() + "_"
         : category.getName() + "_";
