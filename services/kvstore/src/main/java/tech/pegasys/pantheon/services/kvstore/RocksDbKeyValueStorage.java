@@ -112,7 +112,7 @@ public class RocksDbKeyValueStorage implements KeyValueStorage, Closeable {
     TickerType.NO_ITERATORS, // COUNT: 0
     TickerType.NUMBER_MULTIGET_BYTES_READ, // COUNT: 0
     TickerType.NUMBER_MULTIGET_KEYS_READ, // COUNT: 0
-    TickerType.NUMBER_MULTIGET_BYTES_READ, // COUNT: 0
+    TickerType.NUMBER_MULTIGET_CALLS, // COUNT: 0
     TickerType.NUMBER_FILTERED_DELETES, // COUNT: 0
     TickerType.NUMBER_MERGE_FAILURES, // COUNT: 0
     TickerType.BLOOM_FILTER_PREFIX_CHECKED, // COUNT: 0
