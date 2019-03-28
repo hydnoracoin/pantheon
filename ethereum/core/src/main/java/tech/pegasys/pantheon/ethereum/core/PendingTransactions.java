@@ -84,7 +84,8 @@ public class PendingTransactions {
             MetricCategory.TRANSACTION_POOL,
             "transactions_removed_total",
             "Count of transactions removed from the transaction pool",
-            "source", "operation");
+            "source",
+            "operation");
   }
 
   public boolean addRemoteTransaction(final Transaction transaction) {
